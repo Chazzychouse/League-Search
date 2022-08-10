@@ -52,6 +52,8 @@ function App() {
       });
   }
 
+  function getMatchHistory(event) {}
+
   function handleKeyDown(event) {
     if (event.key === "Enter") {
       searchForPlayer(event);
