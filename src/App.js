@@ -7,6 +7,7 @@ import React, { useState } from "react";
 function App() {
   const [searchText, setSearchText] = useState("");
   const [playerData, setPlayerData] = useState({});
+  const [matchData, setMatchData] = useState({});
   const [moreData, setMoreData] = useState({});
   const API_KEY = "RGAPI-1feb4546-c319-4568-a975-c8eac306985e";
 
@@ -51,11 +52,21 @@ function App() {
       });
   }
 
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      searchForPlayer(event);
+    }
+  }
+
   return (
     <div className="App">
       <div className="container">
         <h5>League Search</h5>
-        <input type="text" onChange={(e) => setSearchText(e.target.value)} />
+        <input
+          type="text"
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => handleKeyDown(e)}
+        />
         <button onClick={(e) => searchForPlayer(e)}>Search</button>
       </div>
       <div id="loaded-content">
@@ -95,6 +106,8 @@ function App() {
             <p>
               Wins: {moreData[0].wins} Losses: {moreData[0].losses}
             </p>
+            <button onClick={(e) => getMatchHistory(e)}>Match History</button>
+            <p></p>
           </>
         ) : (
           <></>
